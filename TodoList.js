@@ -9,6 +9,17 @@ class TodoList {
     return this.todoArray;
   }
 
+  listById(id) {
+    const requestedTodo = this.todoArray.filter(todo => todo.id === id)
+    return requestedTodo[0]; // will return undefined if no match
+  }
+
+  idCheck(id) {
+    const requestedTodo = this.todoArray.find(todo => todo.id === id)
+    return requestedTodo !== undefined;
+    // will return true of false
+  }
+
   add(thingToDo) {
     const todo = new Todo(thingToDo);
     todo.id = this.assignId()
