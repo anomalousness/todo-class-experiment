@@ -29,6 +29,23 @@ describe('todoController', () => {
     });
   });
 
+  describe('GET /todos/:id', () => {
+    test('should return a specific todo object', async () => {
+      // Arrange
+
+      // Act
+      const response = await request(app).get('/todos/2');
+      
+      // Assert
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual({
+        id: expect.any(Number),
+        item: 'Learn Kotlin',
+        completed: false,
+      })
+    });
+  });
+
   describe('POST /todos', () => {
     test('should add a todo to the array of todo objects and return the created todo', async () => {
       // Arrange

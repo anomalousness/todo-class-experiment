@@ -8,7 +8,7 @@ const getTodos = (req, res) => {
 
 const getTodoById = (req, res) => {
   const { id } = req.params;
-  const requestedTodo = todoList.listById(id);
+  const requestedTodo = todoList.listById(Number(id));
 
   if (!requestedTodo) notFound(res)
 
