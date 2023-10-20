@@ -33,6 +33,55 @@ describe('todoController', () => {
       expect(mRes.json.mock.calls[0][0][2].item).toBe('Go climbing');
     });
   });
+
+  describe('getTodoById', () => {
+    test('should get a specified todo object', () => {
+      // Arrange
+      const mReq = {
+        params: {
+        id: 1
+      }};
+      const mRes = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+
+      // Act
+      todoController.getTodoById(mReq, mRes);
+
+      // Assert
+      expect(mRes.status).toBeCalledWith(200);
+      expect(mRes.json.mock.calls[0][0]).toEqual({
+            id: 1,
+            item: 'Learn TDD',
+            completed: false,
+          },
+      );
+    });
+
+    test('should return 404 when ID does not exist', () => {
+      // Arrange
+      const mReq = {
+        params: {
+        id: 99
+      }};
+      const mRes = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+
+      // Act
+      todoController.getTodoById(mReq, mRes);
+
+      // Assert
+      expect(mRes.status).toBeCalledWith(404);
+      expect(mRes.json.mock.calls[0][0]).toEqual({
+        error: "Not Found",
+        message: "Todo with that ID was not found"
+      },
+      );
+    });
+  });
   
   describe('addTodo', () => {
     test('should add a todo object to the array of todo objects', () => {
