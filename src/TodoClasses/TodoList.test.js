@@ -167,4 +167,21 @@ describe('TodoList class', () => {
       expect(check3).toBe(false);
     });
   });
+  
+  describe('resetForTests()', () => {
+    test('should return true when id exists', () => {
+      // Arrange
+      const todoList = new TodoList();
+      
+      // Act
+      const idCheck = todoList.idCheck(1);
+      todoList.resetForTests();
+      const todos = todoList.list();
+      
+      // Assert
+      expect(idCheck).toBe(false);
+      expect(todos.length).toBe(3);
+      expect(todos[2].item).toBe("Go climbing");
+    });
+  });
 });

@@ -1,14 +1,13 @@
 const todoController = require('./todoController');
 const TodoList = require('../src/TodoClasses/TodoList');
+const initialiseTodoList = require('../utils/initialiseTodoList');
 let todoList;
 
+
 describe('todoController', () => {
-  // beforeEach(() => {
-  //   todoList = new TodoList();
-  //   todoList.add('Learn TDD');
-  //   todoList.add('Learn Kotlin');
-  //   todoList.add('Go climbing');
-  // });
+  beforeEach(() => {
+    todoList = initialiseTodoList();
+  });
 
   describe('getTodos', () => {
     test('should get an array of todo objects', () => {
@@ -24,7 +23,7 @@ describe('todoController', () => {
 
       // Assert
       expect(mRes.status).toBeCalledWith(200);
-      expect(mRes.json).toBeCalledWith(
+      expect(mRes.json.mock.calls[0][0]).toEqual(
         expect.arrayContaining([
           expect.objectContaining({
             id: 1,
@@ -35,6 +34,34 @@ describe('todoController', () => {
       );
       expect(mRes.json.mock.calls[0][0].length).toBe(3);
       expect(mRes.json.mock.calls[0][0][2].item).toBe('Go climbing');
+    });
+  });
+  
+  describe('postTodo', () => {
+    test('should add a todo object to the array of todo objects', () => {
+      // Arrange
+      const mReq = {
+        body: {
+          item: 'Go see Grandma'
+      }};
+      const mRes = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+
+      // Act
+      todoController.postTodo(mReq, mRes);
+      const todos = todoList.list()
+      // console.log(todoList);
+
+      // Assert
+      // expect(todos.length).toBe(4)
+      expect(mRes.status).toBeCalledWith(201);
+      expect(mRes.json.mock.calls[0][0]).toEqual({
+        id: expect.any(Number),
+        item: 'Go see Grandma',
+        completed: false,
+      });
     });
   });
 });

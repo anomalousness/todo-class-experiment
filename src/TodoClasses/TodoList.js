@@ -22,8 +22,16 @@ class TodoList {
 
   add(thingToDo) {
     const todo = new Todo(thingToDo);
-    todo.id = this.assignId()
+    todo.id = this.assignId();
     this.todoArray.push(todo);
+    return todo;
+  }
+
+  resetForTests() {
+    this.todoArray = [];
+    this.add('Learn TDD');
+    this.add('Learn Kotlin');
+    this.add('Go climbing');
   }
 
   assignId() {

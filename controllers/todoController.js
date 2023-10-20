@@ -7,6 +7,14 @@ const getTodos = (req, res) => {
   res.status(200).json(todos);
 };
 
+const postTodo = (req, res) => {
+  const { item } = req.body;
+  const newTodo = todoList.add(item);
+  // console.log(todoList)
+  res.status(201).json(newTodo);
+};
+
 module.exports = {
   getTodos,
+  postTodo,
 };
