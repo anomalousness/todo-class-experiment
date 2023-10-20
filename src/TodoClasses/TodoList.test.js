@@ -18,12 +18,13 @@ describe('TodoList class', () => {
       const todoList = new TodoList();
       
       // Act
-      todoList.add("Go climbing");
+      const newTodo = todoList.add("Go climbing");
       const updatedList = todoList.list()
       
       // Assert
       expect(updatedList.length).toBe(1);
       expect(updatedList[0].item).toBe("Go climbing");
+      expect(newTodo.completed).toBe(false);
     });
     
     test('should create mulitple new todos and add them to the todo array', () => {
@@ -33,13 +34,14 @@ describe('TodoList class', () => {
       // Act
       todoList.add("Go climbing");
       todoList.add("Relax");
-      todoList.add("Visit Grandma");
+      const newTodo = todoList.add("Visit Grandma");
       const updatedList = todoList.list()
       
       // Assert
       expect(updatedList.length).toBe(3);
       expect(updatedList[0].item).toBe("Go climbing");
-      expect(updatedList[2].item).toBe("Visit Grandma");
+      expect(updatedList[1].item).toBe("Relax");
+      expect(newTodo.item).toBe("Visit Grandma");
     });
   });
   
