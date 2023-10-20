@@ -1,5 +1,5 @@
 const todoController = require('./todoController');
-const { TodoList, todoList } = require('../src/TodoClasses/TodoList');
+const { todoList } = require('../src/TodoClasses/TodoList');
 
 describe('todoController', () => {
   beforeEach(() => {
@@ -83,12 +83,12 @@ describe('todoController', () => {
     });
   });
   
-  describe('addTodo', () => {
-    test('should add a todo object to the array of todo objects', () => {
+  describe('deleteTodo', () => {
+    test('should delete a todo object from the array of todo objects', () => {
       // Arrange
       const mReq = {
-        body: {
-          item: 'Go see Grandma'
+        params: {
+          id: 3
       }};
       const mRes = {
         status: jest.fn().mockReturnThis(),
@@ -96,16 +96,41 @@ describe('todoController', () => {
       };
 
       // Act
-      todoController.addTodo(mReq, mRes);
-      const todos = todoList.list()
+      todoController.deleteTodo(mReq, mRes);
+      const todos = todoList.getAll()
 
       // Assert
-      expect(todos.length).toBe(4)
-      expect(mRes.status).toBeCalledWith(201);
+      expect(todos.length).toBe(2)
+      expect(mRes.status).toBeCalledWith(200);
       expect(mRes.json.mock.calls[0][0]).toEqual({
         id: expect.any(Number),
-        item: 'Go see Grandma',
-        completed: false,
+        item: 'Go climbing',
+        completed: expect.any(Boolean),
+      });
+    });
+    
+    test('should return 404 when ID is invalid', () => {
+      // Arrange
+      const mReq = {
+        params: {
+          id: 99
+      }};
+      const mRes = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+
+      // Act
+      todoController.deleteTodo(mReq, mRes);
+      const todos = todoList.getAll()
+
+      // Assert
+      expect(todos.length).toBe(3)
+      expect(mRes.status).toBeCalledWith(404);
+      expect(mRes.status).not.toBeCalledWith(200);
+      expect(mRes.json.mock.calls[0][0]).toEqual({
+        error: "Not Found",
+        message: "Todo with that ID was not found"
       });
     });
   });

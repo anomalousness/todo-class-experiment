@@ -6,7 +6,7 @@ describe('TodoList class', () => {
     const todoList = new TodoList();
     
     // Act
-    const todos = todoList.list();
+    const todos = todoList.getAll();
     
     // Assert
     expect(todos.length).toBe(0);
@@ -19,7 +19,7 @@ describe('TodoList class', () => {
       
       // Act
       const newTodo = todoList.add("Go climbing");
-      const updatedList = todoList.list()
+      const updatedList = todoList.getAll()
       
       // Assert
       expect(updatedList.length).toBe(1);
@@ -35,7 +35,7 @@ describe('TodoList class', () => {
       todoList.add("Go climbing");
       todoList.add("Relax");
       const newTodo = todoList.add("Visit Grandma");
-      const updatedList = todoList.list()
+      const updatedList = todoList.getAll()
       
       // Assert
       expect(updatedList.length).toBe(3);
@@ -52,7 +52,7 @@ describe('TodoList class', () => {
       
       // Act
       todoList.add("Go climbing");
-      const updatedList = todoList.list()
+      const updatedList = todoList.getAll()
       
       // Assert
       expect(updatedList[0].id).toBe(1);
@@ -66,7 +66,7 @@ describe('TodoList class', () => {
       todoList.add("Go climbing");
       todoList.add("Relax");
       todoList.add("Visit Grandma");
-      const updatedList = todoList.list()
+      const updatedList = todoList.getAll()
       
       // Assert
       expect(updatedList[1].id).toBe(2);
@@ -79,24 +79,24 @@ describe('TodoList class', () => {
       
       // Act
       todoList.add("Relax");
-      let updatedList = todoList.list()
+      let updatedList = todoList.getAll()
       updatedList[0].id = 12
       todoList.add("Get busy");
-      updatedList = todoList.list()
+      updatedList = todoList.getAll()
       
       // Assert
       expect(updatedList[1].id).toBe(13);
     });
   });
   
-  describe('listById()', () => {
+  describe('getById()', () => {
     test('should return a single todo of id 1', () => {
       // Arrange
       const todoList = new TodoList();
       
       // Act
       todoList.add("Go climbing");
-      const todo = todoList.listById(1);
+      const todo = todoList.getById(1);
       
       // Assert
       expect(todo.id).toBe(1);
@@ -111,7 +111,7 @@ describe('TodoList class', () => {
       todoList.add("Go climbing");
       todoList.add("Go swimming");
       todoList.add("Go to sleep");
-      const todo = todoList.listById(3);
+      const todo = todoList.getById(3);
       
       // Assert
       expect(todo.id).toBe(3);
@@ -124,9 +124,9 @@ describe('TodoList class', () => {
       
       // Act
       todoList.add("Go climbing");
-      const todo1 = todoList.listById(2);
-      const todo2 = todoList.listById("Hello");
-      const todo3 = todoList.listById({space: "is the place"});
+      const todo1 = todoList.getById(2);
+      const todo2 = todoList.getById("Hello");
+      const todo3 = todoList.getById({space: "is the place"});
       
       // Assert
       expect(todo1).toBe(undefined);
@@ -178,7 +178,7 @@ describe('TodoList class', () => {
       // Act
       const idCheck = todoList.idCheck(1);
       todoList.resetForTests();
-      const todos = todoList.list();
+      const todos = todoList.getAll();
       
       // Assert
       expect(idCheck).toBe(false);

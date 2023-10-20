@@ -5,11 +5,11 @@ class TodoList {
     this.todoArray = [];
   }
 
-  list() {
+  getAll() {
     return this.todoArray;
   }
 
-  listById(id) {
+  getById(id) {
     const requestedTodo = this.todoArray.filter(todo => todo.id === id)
     return requestedTodo[0]; // will return undefined if no match
   }
@@ -25,6 +25,14 @@ class TodoList {
     todo.id = this.assignId();
     this.todoArray.push(todo);
     return todo;
+  }
+
+  delete(id) {
+    if (!this.idCheck(id)) return { error: "That ID does not exist" };
+    const todoToDelete = this.getById(id);
+    const targetIndex = this.todoArray.indexOf(todoToDelete)
+    this.todoArray.splice(targetIndex, 1);
+    return todoToDelete;
   }
 
   resetForTests() {

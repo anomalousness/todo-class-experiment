@@ -61,7 +61,7 @@ describe('todoController', () => {
             completed: false,
           },
       );
-      expect(todoList.list().length).toBe(4);
+      expect(todoList.getAll().length).toBe(4);
     });
   });
 });

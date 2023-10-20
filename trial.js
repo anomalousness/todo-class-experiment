@@ -1,14 +1,18 @@
-const Todo = require('./Todo');
-const TodoList = require('./TodoList');
-
-const todo1 = new Todo("Clean");
-
-console.log(todo1.id)
-console.log(todo1.item)
-console.log(todo1.completed)
+const Todo = require('./src/TodoClasses/Todo');
+const {TodoList} = require('./src/TodoClasses/TodoList');
 
 const todoList = new TodoList;
 
-console.log(todoList.assignId())
+todoList.add('clean');
+todoList.add('sleep');
+todoList.add('eat');
 
-todoList.add('s')
+
+// console.log(todo1.id)
+// console.log(todo1.item)
+// console.log(todo1.completed)
+
+
+// console.log(todoList.assignId())
+
+console.log(todoList.delete(2))
