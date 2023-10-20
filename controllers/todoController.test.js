@@ -1,12 +1,9 @@
 const todoController = require('./todoController');
-const TodoList = require('../src/TodoClasses/TodoList');
-const initialiseTodoList = require('../utils/initialiseTodoList');
-let todoList;
-
+const { TodoList, todoList } = require('../src/TodoClasses/TodoList');
 
 describe('todoController', () => {
   beforeEach(() => {
-    todoList = initialiseTodoList();
+    todoList.resetForTests()
   });
 
   describe('getTodos', () => {
@@ -52,10 +49,9 @@ describe('todoController', () => {
       // Act
       todoController.postTodo(mReq, mRes);
       const todos = todoList.list()
-      // console.log(todoList);
 
       // Assert
-      // expect(todos.length).toBe(4)
+      expect(todos.length).toBe(4)
       expect(mRes.status).toBeCalledWith(201);
       expect(mRes.json.mock.calls[0][0]).toEqual({
         id: expect.any(Number),

@@ -1,15 +1,11 @@
 const app = require('./app');
 const request = require('supertest');
-const TodoList = require('./TodoClasses/TodoList');
-let todoList;
+const { TodoList, todoList } = require('./TodoClasses/TodoList');
 
 describe('todoController', () => {
-  // beforeEach(() => {
-  //   todoList = new TodoList();
-  //   todoList.add('Learn TDD');
-  //   todoList.add('Learn Kotlin');
-  //   todoList.add('Go climbing');
-  // });
+  beforeEach(() => {
+    todoList.resetForTests();
+  });
 
   describe('GET /todos', () => {
     test('should return an array of todo objects', async () => {
@@ -17,7 +13,7 @@ describe('todoController', () => {
 
       // Act
       const response = await request(app).get('/todos');
-      // console.log(response);
+      
       // Assert
       expect(response.status).toBe(200);
       expect(response.body).toEqual(

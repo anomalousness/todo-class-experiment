@@ -1,6 +1,5 @@
 const TodoList = require('../src/TodoClasses/TodoList');
-const initialiseTodoList = require('../utils/initialiseTodoList');
-let todoList = initialiseTodoList();
+let {todoList} = require('../src/TodoClasses/TodoList');
 
 const getTodos = (req, res) => {
   const todos = todoList.list();

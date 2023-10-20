@@ -1,4 +1,4 @@
-const TodoList = require('./TodoList')
+const {TodoList} = require('./TodoList')
 
 describe('TodoList class', () => {
   test('should initialise with an empty todo array', () => {

@@ -1,7 +1,5 @@
 const express = require('express');
 const todoRoutes = require('../routes/todoRoutes');
-const initialiseTodoList = require('../utils/initialiseTodoList')
-let todoList = initialiseTodoList();
 
 // console.log(todoList)
 

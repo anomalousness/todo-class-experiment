@@ -40,4 +40,9 @@ class TodoList {
   }
 }
 
-module.exports = TodoList;
+const todoList = new TodoList();
+
+module.exports = {
+  TodoList,
+  todoList
+};
