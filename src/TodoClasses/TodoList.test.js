@@ -186,4 +186,78 @@ describe('TodoList class', () => {
       expect(todos[2].item).toBe("Go climbing");
     });
   });
+
+  describe('update()', () => {
+    test("should update a specified todo object's item value", () => {
+      // Arrange
+      const todoList = new TodoList();
+      
+      // Act
+      todoList.add("Go climbing");
+      todoList.add("Go surfing");
+      const updatedTodo1 = todoList.update(1, "Get some sleep", undefined)
+      const updatedTodo2 = todoList.update(2, "Eat ice cream", undefined)
+      const updatedList = todoList.getAll()
+      
+      // Assert
+      expect(updatedTodo1).toEqual({
+        id: 1,
+        item: "Get some sleep",
+        completed: false
+      });
+      expect(updatedTodo2).toEqual({
+        id: 2,
+        item: "Eat ice cream",
+        completed: false
+      });
+    });
+    
+    test("should update a specified todo object's completed value", () => {
+      // Arrange
+      const todoList = new TodoList();
+      
+      // Act
+      todoList.add("Go climbing");
+      todoList.add("Go surfing");
+      const updatedTodo1 = todoList.update(1, undefined, true)
+      const updatedTodo2 = todoList.update(2, undefined, true)
+      const updatedList = todoList.getAll()
+      
+      // Assert
+      expect(updatedTodo1).toEqual({
+        id: 1,
+        item: "Go climbing",
+        completed: true
+      });
+      expect(updatedTodo2).toEqual({
+        id: 2,
+        item: "Go surfing",
+        completed: true
+      });
+    });
+
+    test("should update a specified todo object's item & completed value", () => {
+      // Arrange
+      const todoList = new TodoList();
+      
+      // Act
+      todoList.add("Go climbing");
+      todoList.add("Go surfing");
+      const updatedTodo1 = todoList.update(1, "Get some sleep", true)
+      const updatedTodo2 = todoList.update(2, "Eat ice cream", true)
+      const updatedList = todoList.getAll()
+      
+      // Assert
+      expect(updatedTodo1).toEqual({
+        id: 1,
+        item: "Get some sleep",
+        completed: true
+      });
+      expect(updatedTodo2).toEqual({
+        id: 2,
+        item: "Eat ice cream",
+        completed: true
+      });
+    });
+  });
 });

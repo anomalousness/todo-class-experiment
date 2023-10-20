@@ -35,6 +35,14 @@ class TodoList {
     return todoToDelete;
   }
 
+  update(id, item, completed) {
+    if (!this.idCheck(id)) return { error: "That ID does not exist" };
+    const todoToUpdate = this.getById(id);
+    todoToUpdate.item = item || todoToUpdate.item;
+    todoToUpdate.completed = completed || todoToUpdate.completed;
+    return todoToUpdate;
+  }
+
   resetForTests() {
     this.todoArray = [];
     this.add('Learn TDD');

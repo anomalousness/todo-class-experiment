@@ -15,7 +15,18 @@ todoList.add('eat');
 
 // console.log(todoList.assignId())
 console.log(todoList.getAll())
-console.log(todoList.delete(2))
+// console.log(todoList.delete(2))
+// console.log(todoList.getAll())
+// console.log(todoList.delete(1))
+// console.log(todoList.getAll())
+
+console.log("update 1, completed true:", todoList.update(1, undefined, true))
 console.log(todoList.getAll())
-console.log(todoList.delete(1))
+
+console.log("update 3, no change:", todoList.update(3, undefined, undefined))
 console.log(todoList.getAll())
+
+console.log("update 3, item & completed:", todoList.update(3, "Nada", true))
+console.log(todoList.getAll())
+
+console.log(todoList.getAll()[2].item);
