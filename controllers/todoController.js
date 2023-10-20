@@ -25,9 +25,9 @@ const updateTodo = (req, res) => {
   const { id } = req.params;
   const { item, completed } = req.body;
 
-  if (!todoList.idCheck(id)) { notFound(res); return; } 
+  if (!todoList.idCheck(Number(id))) { notFound(res); return; } 
 
-  const updateTodo = todoList.update(id, item, completed);
+  const updateTodo = todoList.update(Number(id), item, completed);
 
   res.status(201).json(updateTodo);
 };

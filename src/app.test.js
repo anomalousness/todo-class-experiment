@@ -65,6 +65,24 @@ describe('todoController', () => {
     });
   });
 
+  describe('UPDATE /todos/:id', () => {
+    test('should update a specific todo object', async () => {
+      // Arrange
+
+      // Act
+      const response = await request(app).put('/todos/2').send({item: 'Learn Cockroach'});
+      
+      // Assert
+      expect(response.status).toBe(201);
+      expect(response.body).toEqual({
+        id: 2,
+        item: 'Learn Cockroach',
+        completed: false,
+      })
+      expect(todoList.getAll().length).toEqual(3);
+    });
+  });
+
   describe('DELETE /todos/:id', () => {
     test('should remove a specific todo object from the todos array', async () => {
       // Arrange
