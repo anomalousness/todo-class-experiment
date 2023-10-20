@@ -21,6 +21,17 @@ const addTodo = (req, res) => {
   res.status(201).json(newTodo);
 };
 
+const updateTodo = (req, res) => {
+  const { id } = req.params;
+  const { item, completed } = req.body;
+
+  if (!todoList.idCheck(id)) { notFound(res); return; } 
+
+  const updateTodo = todoList.update(id, item, completed);
+
+  res.status(201).json(updateTodo);
+};
+
 const deleteTodo = (req, res) => {
   const { id } = req.params;
   const todoToDelete = todoList.getById(Number(id));
@@ -42,5 +53,6 @@ module.exports = {
   getTodos,
   getTodoById,
   addTodo,
+  updateTodo,
   deleteTodo,
 };
