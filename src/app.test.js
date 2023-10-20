@@ -79,7 +79,7 @@ describe('todoController', () => {
         item: 'Learn Kotlin',
         completed: false,
       })
-      // expect(todoList.getAll().length).toEqual(2);
+      expect(todoList.getAll().length).toEqual(2);
     });
   });
 });

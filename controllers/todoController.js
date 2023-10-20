@@ -26,8 +26,7 @@ const deleteTodo = (req, res) => {
   const todoToDelete = todoList.getById(Number(id));
 
   if (!todoToDelete) { notFound(res); return; } 
-
-  todoList.delete(id)
+  todoList.delete(Number(id))
 
   res.status(200).json(todoToDelete);
 };
