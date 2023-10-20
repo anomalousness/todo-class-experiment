@@ -1,6 +1,6 @@
 const app = require('./app');
 const request = require('supertest');
-const { TodoList, todoList } = require('./TodoClasses/TodoList');
+const { todoList } = require('./TodoClasses/TodoList');
 
 describe('todoController', () => {
   beforeEach(() => {
@@ -62,6 +62,24 @@ describe('todoController', () => {
           },
       );
       expect(todoList.getAll().length).toBe(4);
+    });
+  });
+
+  describe('DELETE /todos/:id', () => {
+    test('should remove a specific todo object from the todos array', async () => {
+      // Arrange
+
+      // Act
+      const response = await request(app).delete('/todos/2');
+      
+      // Assert
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual({
+        id: 2,
+        item: 'Learn Kotlin',
+        completed: false,
+      })
+      // expect(todoList.getAll().length).toEqual(2);
     });
   });
 });

@@ -9,4 +9,6 @@ router.get('/:id', userController.getTodoById);
 
 router.post('/', userController.addTodo);
 
+router.delete('/:id', userController.deleteTodo);
+
 module.exports = router;

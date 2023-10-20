@@ -14,5 +14,8 @@ todoList.add('eat');
 
 
 // console.log(todoList.assignId())
-
+console.log(todoList.getAll())
 console.log(todoList.delete(2))
+console.log(todoList.getAll())
+console.log(todoList.delete(1))
+console.log(todoList.getAll())
