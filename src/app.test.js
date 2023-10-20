@@ -28,4 +28,23 @@ describe('todoController', () => {
       expect(response.body.length).toBe(3);
     });
   });
+
+  describe('POST /todos', () => {
+    test('should add a todo to the array of todo objects and return the created todo', async () => {
+      // Arrange
+
+      // Act
+      const response = await request(app).post('/todos').send({item: "Go tell it on the mountain"});
+      
+      // Assert
+      expect(response.status).toBe(201);
+      expect(response.body).toEqual({
+            id: expect.any(Number),
+            item: 'Go tell it on the mountain',
+            completed: false,
+          },
+      );
+      expect(todoList.list().length).toBe(4);
+    });
+  });
 });

@@ -34,7 +34,7 @@ describe('todoController', () => {
     });
   });
   
-  describe('postTodo', () => {
+  describe('addTodo', () => {
     test('should add a todo object to the array of todo objects', () => {
       // Arrange
       const mReq = {
@@ -47,7 +47,7 @@ describe('todoController', () => {
       };
 
       // Act
-      todoController.postTodo(mReq, mRes);
+      todoController.addTodo(mReq, mRes);
       const todos = todoList.list()
 
       // Assert
